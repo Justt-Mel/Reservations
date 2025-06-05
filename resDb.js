@@ -60,6 +60,14 @@ const fetchReservation = async () => {
     return response.rows
 }
 
+const deleteReservation = async (id)=>{
+    const SQL = `
+    DELETE FROM reservations
+    WHERE id = $1
+    `
+    await client.query(SQL,[id])
+}
+
 const seed =async ()=>{
     const SQL =`
     DROP TABLE IF EXISTS reservations;
@@ -119,5 +127,6 @@ module.exports ={
     fetchReservation,
     newReservation,
     newCustomer,
-    newRestaurant
+    newRestaurant,
+    deleteReservation
 }

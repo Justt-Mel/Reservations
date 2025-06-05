@@ -6,7 +6,8 @@ const {
     fetchReservation,
     newCustomer,
     newRestaurant,
-    newReservation
+    newReservation,
+    deleteReservation
 } = require('./resDb')
 
 app.get('/customers', async (req, res, next )=>{
@@ -52,6 +53,15 @@ app.post('/restaurants', async (req, res, next)=>{
 app.post('/reservations', async (req, res, next)=>{
     try {
         res.send( await newReservation(req.body))
+    } catch (error) {
+        next(error)
+    }
+})
+
+app.delete('/reservations/:id', async (req, res, next)=>{
+    try {
+        await deleteReservation(req.params.id)
+        res.sendStatus(204)
     } catch (error) {
         next(error)
     }
