@@ -13,6 +13,15 @@ const newCustomer = async (customer)=>{
     return response.rows[0]
 }
 
+const fetchCustomers = async () =>{
+    const SQL = `
+    SELECT *
+    FROM customers
+    `
+    const response = await client.query(SQL)
+    return response.rows
+}
+
 const newRestaurant = async (restaurant)=> {
     const SQL = `
     INSERT INTO restaurants (id,name)
@@ -21,6 +30,15 @@ const newRestaurant = async (restaurant)=> {
     `
     const response = await client.query(SQL, [uuidv4(), restaurant.name])
     return response.rows[0]
+}
+
+const fetchRestaurants = async () =>{
+    const SQL =`
+    SELECT *
+    FROM restaurants
+    `
+    const response = await client.query(SQL)
+    return response.rows
 }
 
 const newReservation = async (reservation) =>{
@@ -86,5 +104,7 @@ const seed =async ()=>{
 }
 module.exports ={
     seed,
-    client
+    client,
+    fetchCustomers,
+    fetchRestaurants
 }

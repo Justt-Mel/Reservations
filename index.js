@@ -3,6 +3,8 @@ const app = express()
 const {seed, 
        client
       } = require('./resDb')
+      
+app.use ('/api', require('./api'))
 
 const init = async () => {
     await client.connect()
