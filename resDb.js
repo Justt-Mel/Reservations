@@ -51,6 +51,15 @@ const newReservation = async (reservation) =>{
     return response.rows[0]
 }
 
+const fetchReservation = async () => {
+    const SQL= `
+    SELECT *
+    FROM reservations
+    `
+    const response = await client.query(SQL)
+    return response.rows
+}
+
 const seed =async ()=>{
     const SQL =`
     DROP TABLE IF EXISTS reservations;
@@ -106,5 +115,9 @@ module.exports ={
     seed,
     client,
     fetchCustomers,
-    fetchRestaurants
+    fetchRestaurants,
+    fetchReservation,
+    newReservation,
+    newCustomer,
+    newRestaurant
 }
